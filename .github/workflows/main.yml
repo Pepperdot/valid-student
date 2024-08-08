@@ -32,4 +32,4 @@ jobs:
           tags: |
             ghcr.io/pepperdot/valid-student:${{ steps.extract_tag.outputs.tag }}
             ghcr.io/pepperdot/valid-student:latest
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64,linux/arm64
