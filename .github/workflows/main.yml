@@ -30,6 +30,6 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/Pepperdot/valid-student:${{ steps.extract_tag.outputs.tag }}
-            ghcr.io/Pepperdot/valid-student:latest
+            ghcr.io/pepperdot/valid-student:${{ steps.extract_tag.outputs.tag }}
+            ghcr.io/pepperdot/valid-student:latest
           platforms: linux/amd64,linux/arm64,linux/arm/v7
