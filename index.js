@@ -15,12 +15,23 @@ async function swotFolder() {
     await child_process.execSync('git -C swot pull');
 }
 
-async function lookForDomain(domain, endings) {
+async function lookForDomain(domain, endings, fullDomain) {
     const mainFolder = path.join(__dirname, 'swot', 'lib', 'domains', ...endings);
     const txtFile = path.join(mainFolder, `${domain}.txt`);
-    // check if the file exists
     const fileExists = fs.existsSync(txtFile);
     if (!fileExists) {
+        const newMainFolder = path.join(__dirname, 'swot', 'lib', 'domains', endings[0]);
+        let domainWithoutEndings = fullDomain.split('.');
+        endings.pop();
+        domainWithoutEndings = domainWithoutEndings.filter(e => !endings.includes(e));
+        const newTxtFile = path.join(newMainFolder, `${domainWithoutEndings[domainWithoutEndings.length-1]}.txt`);
+        const newFileExists = fs.existsSync(newTxtFile);
+        if(newFileExists) {
+            const data = fs.readFileSync(newTxtFile, 'utf8');
+            return {
+                name: data
+            }
+        }
         return {
             error: 'Domain not found'
         }
@@ -41,7 +52,7 @@ async function main() {
     const fullDomain = EmailToCheck.split('@')[1];
     const domain = fullDomain.split('.')[0];
     const endings = fullDomain.split('.').slice(1).reverse();
-    const response = await lookForDomain(domain, endings);
+    const response = await lookForDomain(domain, endings, fullDomain);
     if(response.error) {
         log({
             valid: false,
