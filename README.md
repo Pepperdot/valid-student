@@ -9,7 +9,7 @@ This is a quick project using the REQ_EMAIL environment variable to validate a s
 ## Usage
 
 ```bash
-docker run -e REQ_EMAIL="your@student.email" --rm ghcr.io/pepperdot/valid-student:latest
+docker run --pull always -e REQ_EMAIL="your@student.email" --rm ghcr.io/pepperdot/valid-student:latest
 ```
 
 ## Node.JS usage
