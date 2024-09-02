@@ -10,9 +10,10 @@ function log(json) {
 async function swotFolder() {
     const folderExists = fs.existsSync('./swot');
     if (!folderExists) {
-        await child_process.execSync('git clone https://github.com/JetBrains/swot.git');
+        // make it not log the output
+        await child_process.execSync('git clone https://github.com/JetBrains/swot.git', {stdio: 'ignore'});
     }
-    await child_process.execSync('git -C swot pull');
+    await child_process.execSync('git -C swot pull', {stdio: 'ignore'});
 }
 
 async function lookForDomain(domain, endings, fullDomain) {
