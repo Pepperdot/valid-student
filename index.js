@@ -4,6 +4,7 @@ const path = require('path');
 require('dotenv').config();
 
 function log(json) {
+    console.log("Response")
     console.log(JSON.stringify(json, null, 2));
 }
 
